@@ -1,0 +1,19 @@
+This is just a little hack to work around a problem I found with the
+arduino plugin for the eclipse IDE when using my arduino nano.
+It seems that on the eclipse plugin the baudrate is hardcoded to 115200
+and the arduino nano requires a 57600 baudrate.
+
+I am using this on a Linux machine and the avrdude program installed by
+the eclipse plugin is in:
+~/.arduinocdt/packages/arduino/tools/avrdude/6.3.0-arduino9/bin
+
+So to use this script follow this steps:
+$ mv ~/.arduinocdt/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/avrdude ~/.arduinocdt/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/avrdude.real
+$ cp avrdude ~/.arduinocdt/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/
+$ chmod +x ~/.arduinocdt/packages/arduino/tools/avrdude/6.3.0-arduino9/bin/avrdude
+
+This script will temporarily substitute the avrdude program check the
+parameters for the nano board and adjust the baudrate in that case. Then
+it just pass everything to the real avrdude program.
+
+I hope this helps!
